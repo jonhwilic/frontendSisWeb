@@ -9,7 +9,7 @@ function AddCategories() {
   const [categories, setCategories] = useState([])
   const history = useHistory()
 
-  const materias = [
+  const categorias = [
     'Romance',
     'Pedagógico',
     'Biografia',
@@ -32,7 +32,7 @@ function AddCategories() {
     axios
       .get(`http://127.0.0.1:5000/user?id=${id}`)
       .then(function (response) {
-        setCategories(response.data.body.user.materias)
+        setCategories(response.data.body.user.categorias)
       })
       .catch(function (error) {
         console.error(error)
@@ -41,15 +41,15 @@ function AddCategories() {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    console.log(categories)
+    console.log('Categorias =====>>>>>>', categories)
     axios
-      .put(`http://127.0.0.1:5000/materias`, {
+      .put(`http://127.0.0.1:5000/categories`, {
         id: id,
-        materias: categories,
+        categorias: categories,
       })
       .then(function (response) {
         console.log(response)
-        setCategories(response.data.body.materias)
+        setCategories(response.data.body.categorias)
         history.push('/categories')
       })
       .catch(function (error) {
@@ -68,7 +68,7 @@ function AddCategories() {
           onSelect={(e) => {
             setCategories(e)
           }}
-          options={materias}
+          options={categorias}
           style={style}
         />
         <AddReviewButton

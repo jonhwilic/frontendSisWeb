@@ -4,14 +4,14 @@ import { useHistory } from 'react-router-dom'
 import {
   Wrapper,
   AddReviewButton,
-  DeleteMatterButton,
+  DeleteReviewButton,
   Table,
   TableTd,
   TableTr,
 } from './styles'
 
 export default function Review() {
-  const [duvidas, setDuvidas] = useState([])
+  const [reviews, setReviews] = useState([])
   const history = useHistory()
 
   useEffect(() => {
@@ -19,25 +19,24 @@ export default function Review() {
       axios
         .get(`http://127.0.0.1:5000/user?id=${localStorage.getItem('user_id')}`)
         .then(function (response) {
-          setDuvidas(response.data.body.user.duvidas)
+          setReviews(response.data.body.user.reviews)
         })
         .catch(function (error) {
           console.error(error)
         })
     }, 1000)
-  }, [duvidas])
+  }, [reviews])
 
-  const deletarDuvida = (duvida_id) => {
-    console.log(duvida_id)
+  const deletarReview = (review_id) => {
+    console.log(review_id)
     axios
       .delete(
-        `http://127.0.0.1:5000/duvida?id=${localStorage.getItem(
+        `http://127.0.0.1:5000/review?id=${localStorage.getItem(
           'user_id'
-        )}&id_duvida=${duvida_id}`
+        )}&id_review=${review_id}`
       )
       .then(function (response) {
         console.log(response)
-        // setDuvidas(response.data.body.user.duvidas)
       })
       .catch(function (error) {
         console.error(error)
@@ -52,22 +51,24 @@ export default function Review() {
         </AddReviewButton>
         <Table>
           <TableTr>
+            <th>Título do Livro</th>
             <th>Resenha</th>
             <th>Categoria</th>
             <th>Ações</th>
           </TableTr>
-          {duvidas.map((duvida) => (
-            <TableTr key={duvida.id_duvida}>
-              <TableTd>{duvida.pergunta}</TableTd>
-              <TableTd>{duvida.materia}</TableTd>
+          {reviews.map((review) => (
+            <TableTr key={review.id_review}>
+              <TableTd>{review.title}</TableTd>
+              <TableTd>{review.review}</TableTd>
+              <TableTd>{review.categoria}</TableTd>
               <TableTd>
-                <DeleteMatterButton
+                <DeleteReviewButton
                   onClick={() => {
-                    console.log(duvida)
-                    deletarDuvida(duvida.id_duvida)
+                    console.log(review)
+                    deletarReview(review.id_review)
                   }}>
                   Deletar
-                </DeleteMatterButton>
+                </DeleteReviewButton>
               </TableTd>
             </TableTr>
           ))}

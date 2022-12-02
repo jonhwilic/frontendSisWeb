@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 import {
   Wrapper,
   AddCategoryButton,
-  DeleteMatterButton,
+  DeleteCategoryButton,
   Table,
   TableTd,
   TableTr,
@@ -12,7 +12,7 @@ import axios from 'axios'
 
 export default function CategoryTable() {
   const history = useHistory()
-  const [matter, setMatter] = useState([])
+  const [category, setCategory] = useState([])
   useEffect(() => {
     const id = localStorage.getItem('user_id')
 
@@ -20,33 +20,33 @@ export default function CategoryTable() {
       axios
         .get(`http://127.0.0.1:5000/user?id=${id}`)
         .then(function (response) {
-          setMatter(response.data.body.user.materias)
+          setCategory(response.data.body.user.categorias)
         })
         .catch(function (error) {
           console.error(error)
         })
     }, 1000)
-  }, [matter])
+  }, [category])
 
-  const MatterDelete = (materia) => {
-    // TODO: Mudar a api depois para a nossa api para deletar as materias
+  const CategoryDelete = (categoria) => {
     const id = localStorage.getItem('user_id')
     const newArray = []
 
-    matter.map((mat) => {
-      if (mat !== materia) {
-        newArray.push(mat)
+    category.map((cat) => {
+      if (cat !== categoria) {
+        newArray.push(cat)
       }
     })
 
     axios
-      .put(`http://127.0.0.1:5000/materias`, {
+      .put(`http://127.0.0.1:5000/categories`, {
         id: id,
-        materias: newArray,
+        categorias: newArray,
       })
       .then(function (response) {
         console.log(response)
-        setMatter(response.data.body.user.materias)
+        setCategory(response.data.body.user.categorias)
+
       })
       .catch(function (error) {
         console.error(error)
@@ -60,17 +60,17 @@ export default function CategoryTable() {
         </AddCategoryButton>
         <Table>
           <TableTr>
-            <th>Materias</th>
+            <th>Categorias</th>
             <th>Ações</th>
           </TableTr>
 
-          {matter.map((materia) => (
+          {category.map((categoria) => (
             <TableTr>
-              <TableTd>{materia}</TableTd>
+              <TableTd>{categoria}</TableTd>
               <TableTd>
-                <DeleteMatterButton onClick={() => MatterDelete(materia)}>
+                <DeleteCategoryButton onClick={() => CategoryDelete(categoria)}>
                   Deletar
-                </DeleteMatterButton>
+                </DeleteCategoryButton>
               </TableTd>
             </TableTr>
           ))}

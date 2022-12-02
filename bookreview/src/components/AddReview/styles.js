@@ -28,7 +28,7 @@ export const Form = styled.form`
 
 export const Input = styled.textarea`
   width: 50rem;
-  height: 25rem;
+  height: 10rem;
 
   background-color: ${darkTheme.bg};
   color: ${darkTheme.text};

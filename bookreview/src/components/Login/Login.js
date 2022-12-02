@@ -44,7 +44,7 @@ function Login() {
       <GlobalStyle />
       <Wrapper>
         <Form onSubmit={handleSubmit}>
-          <Title>Online Booster</Title>
+          <Title>Book Reviews</Title>
           <Label>Email</Label>
           <Input
             type='email'

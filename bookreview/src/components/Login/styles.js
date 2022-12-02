@@ -14,7 +14,7 @@ export const Wrapper = styled.section`
 
 export const Label = styled.b`
   margin-bottom: 20px;
-  color: ${darkTheme.text};
+  color: black;
 `
 
 export const Form = styled.form`
@@ -31,7 +31,7 @@ export const Input = styled.input`
   max-width: 100%;
   padding: 11px 13px;
   background: ${darkTheme.bg2};
-  color: ${darkTheme.text};
+  color: black;
   margin-bottom: 0.9rem;
   border-radius: 4px;
   outline: 0;
@@ -63,7 +63,7 @@ export const Button = styled.button`
 
 export const Title = styled.h2`
   font-weight: normal;
-  color: ${darkTheme.text};
+  color: black;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.1);
   text-align: center;
   padding-bottom: 3rem;

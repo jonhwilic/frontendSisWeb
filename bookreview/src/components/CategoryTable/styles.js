@@ -20,7 +20,7 @@ export const AddCategoryButton = styled.button`
   font-size: 1rem;
   cursor: pointer;
 `
-export const DeleteMatterButton = styled.button`
+export const DeleteCategoryButton = styled.button`
   color: ${darkTheme.text};
   background-color: ${darkTheme.delete};
   align-items: center;
